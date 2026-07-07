@@ -1,6 +1,6 @@
 # NLP-Powered Query Understanding & Intent Classification
 
-A comprehensive system for understanding user queries and classifying intents using transformer-based embeddings, FAISS for semantic vector recall, and personalized ranking for hospitality and dining applications.
+A comprehensive system for understanding user queries and classifying intents using transformer-based embeddings, FAISS for semantic vector recall, and personalized ranking for hospitality and dining queries.
 
 ## 🚀 Features
 
@@ -13,7 +13,7 @@ A comprehensive system for understanding user queries and classifying intents us
 
 ## 📋 System Architecture
 
-\`\`\`
+```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   User Query    │───▶│ Intent Classifier │───▶│ Query Processor │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
@@ -21,12 +21,12 @@ A comprehensive system for understanding user queries and classifying intents us
 ┌─────────────────┐    ┌──────────────────┐             │
 │ Ranked Results  │◀───│ Ranking Pipeline │◀────────────┘
 └─────────────────┘    └──────────────────┘             │
-                                │                        │
-                       ┌────────▼────────┐    ┌─────────▼─────────┐
-                       │ User Profile    │    │ FAISS Vector     │
-                       │ Personalization │    │ Store Search     │
-                       └─────────────────┘    └───────────────────┘
-\`\`\`
+                                 │                        │
+                        ┌────────▼────────┐    ┌─────────▼─────────┐
+                        │ User Profile    │    │ FAISS Vector     │
+                        │ Personalization │    │ Store Search     │
+                        └─────────────────┘    └───────────────────┘
+```
 
 ## 🛠️ Installation
 
@@ -39,26 +39,26 @@ A comprehensive system for understanding user queries and classifying intents us
 ### Setup
 
 1. **Clone the repository**
-\`\`\`bash
+```bash
 git clone <your-repo-url>
 cd nlp-query-understanding
-\`\`\`
+```
 
 2. **Create virtual environment**
-\`\`\`bash
+```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-\`\`\`
+```
 
 3. **Install dependencies**
-\`\`\`bash
+```bash
 pip install -r requirements.txt
-\`\`\`
+```
 
 4. **Download required models** (automatic on first run)
-\`\`\`bash
+```bash
 python -c "from src.query_understanding import QueryUnderstandingSystem; system = QueryUnderstandingSystem()"
-\`\`\`
+```
 
 ## 🖥️ Running the Full-Stack App (Web UI + Backend)
 
@@ -102,7 +102,7 @@ real intent classification, semantic results, and ranking breakdown.
 
 ### Basic Usage
 
-\`\`\`python
+```python
 from src.query_understanding import QueryUnderstandingSystem
 from data.sample_services import SAMPLE_SERVICES
 
@@ -119,11 +119,11 @@ for i, res in enumerate(result["results"][:3], 1):
     score = res["total_score"]
     print(f"{i}. {service['name']} - Score: {score:.3f}")
     print(f"   {service['description']}")
-\`\`\`
+```
 
 ### Personalized Search
 
-\`\`\`python
+```python
 from src.ranking_pipeline import UserProfile
 
 # Create user profile
@@ -140,7 +140,7 @@ result = system.process_query(
     "restaurant for dinner", 
     user_profile=user_profile
 )
-\`\`\`
+```
 
 ## 📊 Intent Categories
 
@@ -162,19 +162,19 @@ The system recognizes 10 specialized intent categories for hospitality/dining:
 ## 🧪 Testing
 
 ### Run Unit Tests
-\`\`\`bash
+```bash
 python tests/test_system.py
-\`\`\`
+```
 
 ### Run Demo
-\`\`\`bash
+```bash
 python examples/demo.py
-\`\`\`
+```
 
 ### Performance Testing
-\`\`\`bash
+```bash
 python -c "from tests.test_system import run_performance_test; run_performance_test()"
-\`\`\`
+```
 
 ## 📈 Performance Metrics
 
@@ -190,28 +190,28 @@ python -c "from tests.test_system import run_performance_test; run_performance_t
 
 Edit `src/config.py` to customize models:
 
-\`\`\`python
+```python
 @dataclass
 class ModelConfig:
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     intent_model: str = "microsoft/DialoGPT-medium"
     max_sequence_length: int = 512
     embedding_dim: int = 384
-\`\`\`
+```
 
 ### FAISS Configuration
 
-\`\`\`python
+```python
 @dataclass
 class FAISSConfig:
     index_type: str = "IndexFlatIP"  # Inner Product for cosine similarity
     nlist: int = 100  # Number of clusters for IVF
     nprobe: int = 10  # Number of clusters to search
-\`\`\`
+```
 
 ## 📁 Project Structure
 
-\`\`\`
+```
 nlp-query-understanding/
 ├── src/
 │   ├── config.py              # System configuration
@@ -229,7 +229,7 @@ nlp-query-understanding/
 ├── models/                   # Saved models (created automatically)
 ├── requirements.txt          # Python dependencies
 └── README.md                # This file
-\`\`\`
+```
 
 ## 🔍 API Reference
 
@@ -270,13 +270,13 @@ FAISS-based vector storage for semantic search.
 ## 🎯 Use Cases
 
 ### Restaurant Discovery
-\`\`\`python
+```python
 # Find restaurants based on cuisine and preferences
 result = system.process_query("Italian restaurant with outdoor seating")
-\`\`\`
+```
 
 ### Personalized Recommendations
-\`\`\`python
+```python
 # Get recommendations based on user history and preferences
 user_profile = UserProfile(
     user_id="frequent_diner",
@@ -284,48 +284,48 @@ user_profile = UserProfile(
     price_range=(2, 4)
 )
 result = system.process_query("dinner tonight", user_profile)
-\`\`\`
+```
 
 ### Business Intelligence
-\`\`\`python
+```python
 # Analyze query patterns for business insights
 queries = ["cheap eats", "fine dining", "family restaurant", "date night"]
 analysis = system.analyze_query_patterns(queries)
 print(f"Most common intent: {max(analysis['intent_distribution'], key=analysis['intent_distribution'].get)}")
-\`\`\`
+```
 
 ## 🚀 Deployment
 
 ### Production Setup
 
 1. **Optimize for production**
-\`\`\`python
+```python
 # Use GPU if available
 import torch
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-\`\`\`
+```
 
 2. **Scale with multiple workers**
-\`\`\`python
+```python
 # Use multiprocessing for batch processing
 from multiprocessing import Pool
 
 def process_batch(queries):
     return [system.process_query(q) for q in queries]
-\`\`\`
+```
 
 3. **Cache frequently accessed data**
-\`\`\`python
+```python
 # Implement Redis caching for common queries
 import redis
 cache = redis.Redis(host='localhost', port=6379, db=0)
-\`\`\`
+```
 
 ### API Deployment
 
 Create a FastAPI service:
 
-\`\`\`python
+```python
 from fastapi import FastAPI
 from src.query_understanding import QueryUnderstandingSystem
 
@@ -336,7 +336,7 @@ system = QueryUnderstandingSystem()
 async def search_services(query: str, user_id: str = None):
     result = system.process_query(query)
     return result
-\`\`\`
+```
 
 ## 🤝 Contributing
 
@@ -366,6 +366,3 @@ For questions and support:
 ---
 
 **Built with ❤️ for better query understanding and personalized search experiences**
-#   N a t u r a l - L a n g u a g e - Q u e r y i n g  
- #   N a t u r a l - L a n g u a g e - Q u e r y i n g  
- 
