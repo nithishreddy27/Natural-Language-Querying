@@ -1,6 +1,6 @@
 # NLP-Powered Query Understanding & Intent Classification
 
-A comprehensive system for understanding user queries and classifying intents using transformer-based embeddings, FAISS for semantic vector recall, and personalized ranking for hospitality and dining queries.
+A comprehensive system for understanding user queries and classifying intents using transformer based embeddings, FAISS for semantic vector recall, and personalized ranking for hospitality and dining queries.
 
 ## 🚀 Features
 
@@ -39,23 +39,27 @@ A comprehensive system for understanding user queries and classifying intents us
 ### Setup
 
 1. **Clone the repository**
+
 ```bash
 git clone <your-repo-url>
 cd nlp-query-understanding
 ```
 
 2. **Create virtual environment**
+
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 3. **Install dependencies**
+
 ```bash
 pip install -r requirements.txt
 ```
 
 4. **Download required models** (automatic on first run)
+
 ```bash
 python -c "from src.query_understanding import QueryUnderstandingSystem; system = QueryUnderstandingSystem()"
 ```
@@ -86,7 +90,7 @@ npm run dev
 # → open http://localhost:3000
 ```
 
-Type a query (e.g. *"romantic italian restaurant for dinner"*) and press Search.
+Type a query (e.g. _"romantic italian restaurant for dinner"_) and press Search.
 The UI calls `/api/search`, which proxies to the FastAPI backend and renders the
 real intent classification, semantic results, and ranking breakdown.
 
@@ -137,7 +141,7 @@ user_profile = UserProfile(
 
 # Get personalized results
 result = system.process_query(
-    "restaurant for dinner", 
+    "restaurant for dinner",
     user_profile=user_profile
 )
 ```
@@ -146,32 +150,35 @@ result = system.process_query(
 
 The system recognizes 10 specialized intent categories for hospitality/dining:
 
-| Intent | Description | Example Queries |
-|--------|-------------|-----------------|
-| `restaurant_search` | General restaurant finding | "find restaurant", "dining options" |
-| `cuisine_preference` | Specific cuisine requests | "italian food", "chinese restaurant" |
-| `reservation` | Table booking queries | "book table", "make reservation" |
-| `menu_inquiry` | Menu and dish questions | "what's on menu", "dish recommendations" |
-| `price_inquiry` | Cost and budget queries | "restaurant prices", "cheap restaurants" |
-| `location_based` | Location-specific searches | "restaurants near me", "downtown dining" |
-| `rating_review` | Quality and review queries | "best rated", "top restaurants" |
-| `hours_availability` | Operating hours queries | "open now", "late night dining" |
-| `dietary_restrictions` | Special dietary needs | "gluten free", "vegan options" |
-| `ambiance_preference` | Atmosphere preferences | "romantic restaurant", "family friendly" |
+| Intent                 | Description                | Example Queries                          |
+| ---------------------- | -------------------------- | ---------------------------------------- |
+| `restaurant_search`    | General restaurant finding | "find restaurant", "dining options"      |
+| `cuisine_preference`   | Specific cuisine requests  | "italian food", "chinese restaurant"     |
+| `reservation`          | Table booking queries      | "book table", "make reservation"         |
+| `menu_inquiry`         | Menu and dish questions    | "what's on menu", "dish recommendations" |
+| `price_inquiry`        | Cost and budget queries    | "restaurant prices", "cheap restaurants" |
+| `location_based`       | Location-specific searches | "restaurants near me", "downtown dining" |
+| `rating_review`        | Quality and review queries | "best rated", "top restaurants"          |
+| `hours_availability`   | Operating hours queries    | "open now", "late night dining"          |
+| `dietary_restrictions` | Special dietary needs      | "gluten free", "vegan options"           |
+| `ambiance_preference`  | Atmosphere preferences     | "romantic restaurant", "family friendly" |
 
 ## 🧪 Testing
 
 ### Run Unit Tests
+
 ```bash
 python tests/test_system.py
 ```
 
 ### Run Demo
+
 ```bash
 python examples/demo.py
 ```
 
 ### Performance Testing
+
 ```bash
 python -c "from tests.test_system import run_performance_test; run_performance_test()"
 ```
@@ -270,12 +277,14 @@ FAISS-based vector storage for semantic search.
 ## 🎯 Use Cases
 
 ### Restaurant Discovery
+
 ```python
 # Find restaurants based on cuisine and preferences
 result = system.process_query("Italian restaurant with outdoor seating")
 ```
 
 ### Personalized Recommendations
+
 ```python
 # Get recommendations based on user history and preferences
 user_profile = UserProfile(
@@ -287,6 +296,7 @@ result = system.process_query("dinner tonight", user_profile)
 ```
 
 ### Business Intelligence
+
 ```python
 # Analyze query patterns for business insights
 queries = ["cheap eats", "fine dining", "family restaurant", "date night"]
@@ -299,6 +309,7 @@ print(f"Most common intent: {max(analysis['intent_distribution'], key=analysis['
 ### Production Setup
 
 1. **Optimize for production**
+
 ```python
 # Use GPU if available
 import torch
@@ -306,6 +317,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 ```
 
 2. **Scale with multiple workers**
+
 ```python
 # Use multiprocessing for batch processing
 from multiprocessing import Pool
@@ -315,6 +327,7 @@ def process_batch(queries):
 ```
 
 3. **Cache frequently accessed data**
+
 ```python
 # Implement Redis caching for common queries
 import redis
@@ -337,32 +350,3 @@ async def search_services(query: str, user_id: str = None):
     result = system.process_query(query)
     return result
 ```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- HuggingFace Transformers for state-of-the-art NLP models
-- Facebook AI Research for FAISS vector search
-- The open-source community for excellent Python libraries
-
-## 📞 Support
-
-For questions and support:
-- Create an issue on GitHub
-- Check the [examples/demo.py](examples/demo.py) for usage examples
-- Review the test cases in [tests/test_system.py](tests/test_system.py)
-
----
-
-**Built with ❤️ for better query understanding and personalized search experiences**
